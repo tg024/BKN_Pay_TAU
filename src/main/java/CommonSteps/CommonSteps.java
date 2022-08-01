@@ -3,11 +3,10 @@ package CommonSteps;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import static DataObject.LoginData.*;
-import DataObject.LoginData.*;
 
 public class CommonSteps {
     WebDriver driver;
@@ -15,11 +14,14 @@ public class CommonSteps {
     public CommonSteps(WebDriver driver) {
         this.driver = driver;}
 
-        By emailAddressField = By.id("Email");
-        By passwordField = By.id("Password");
-        By loginButton = By.id("btn-login");
-        By profileButton = By.className("user-picture");
-        By settingsButton = By.xpath("/html/body/ngx-app/ngx-pages/ngx-one-column-layout/nb-layout/div/div/div/nb-sidebar/div/div/nb-menu/ul/li[4]/a/span");
+    By emailAddressField = By.id("Email");
+    By passwordField = By.id("Password");
+    By loginButton = By.id("btn-login");
+    By profileButton = By.className("user-picture");
+    By settingsButton = By.xpath("/html/body/ngx-app/ngx-pages/ngx-one-column-layout/nb-layout/div/div/div/nb-sidebar/div/div/nb-menu/ul/li[4]/a/span");
+    By usersButton = By.xpath("/html/body/ngx-app/ngx-pages/ngx-one-column-layout/nb-layout/div/div/div/nb-sidebar/div/div/nb-menu/ul/li[4]/ul/li[4]/a/span");
+    By languageButton = By.className("map-Languages");
+    By englishRadioButton = By.xpath("//*[@id=\"cdk-overlay-0\"]/nb-context-menu/nb-menu/ul/li[1]/a");
 
     @Step ("Fill email address field")
     public  CommonSteps EnterEmail (String emailAddress) throws InterruptedException {
@@ -68,4 +70,23 @@ public class CommonSteps {
         driver.findElement(settingsButton).click();
         return this;
     }
+    @Step ("Navigate to the Users page")
+    public void  ClickUsersButton () {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(usersButton));
+        driver.findElement(usersButton).click();
+    }
+    @Step ("Set language to English")
+    public CommonSteps ChooseEnglishLanguage () {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(languageButton));
+        driver.findElement(languageButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(englishRadioButton));
+            WebElement radioElement = driver.findElement(englishRadioButton);
+            boolean selectState = radioElement.isSelected();
+            if (!selectState) {
+                radioElement.click();
+            }
+            return this;
+        }
 }

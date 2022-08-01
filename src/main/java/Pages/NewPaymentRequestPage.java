@@ -12,7 +12,9 @@ import org.testng.Assert;
 public class NewPaymentRequestPage {
     WebDriver driver;
 
-    public NewPaymentRequestPage(WebDriver driver) {this.driver = driver;}
+    public NewPaymentRequestPage(WebDriver driver) {
+        this.driver = driver;
+    }
 
     By newPaymentRequestButton = By.className("ant-btn");
     By newPaymentRequestPage = By.className("fs-28");
@@ -57,7 +59,7 @@ public class NewPaymentRequestPage {
     public NewPaymentRequestPage ChooseEmailOption() {
         WebElement radioElement = driver.findElement(emailRadioButton);
         boolean selectState = radioElement.isSelected();
-        if(!selectState){
+        if (!selectState) {
             radioElement.click();
             Assert.assertTrue(radioElement.isEnabled());
         }
@@ -67,7 +69,7 @@ public class NewPaymentRequestPage {
     public NewPaymentRequestPage ChoosePhoneOption() {
         WebElement radioElement = driver.findElement(phoneRadioButton);
         boolean selectState = radioElement.isSelected();
-        if(!selectState){
+        if (!selectState) {
             radioElement.click();
         }
         return this;
@@ -108,7 +110,6 @@ public class NewPaymentRequestPage {
         Assert.assertEquals(PhoneNumberValue, phoneNumber);
         return this;
     }
-
     @Step("Click Send money request button")
     public NewPaymentRequestPage ClickSendMoneyRequestButton() {
         driver.findElement(sendMoneyRequestButton).click();
