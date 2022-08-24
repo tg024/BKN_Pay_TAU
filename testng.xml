@@ -4,10 +4,7 @@
     <test name="TestSuit1" parallel="classes">
         <classes>
             <class name="BknPay.LoginTest"></class>
-            <class name="BknPay.NewPaymentRequestTest"></class>
-            <class name="BknPay.ResetPasswordTest"></class>
-            <class name="BknPay.NewPaymentLinkTest"></class>
-            <class name="BknPay.EditCompanyInfoTest"></class>
+            <class name="BknPay.AddNewUserTest"></class>
         </classes>
     </test>
     <!--    <test name="TestSuit2" parallel="tests">-->
